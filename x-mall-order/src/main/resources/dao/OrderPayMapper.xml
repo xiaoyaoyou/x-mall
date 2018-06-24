@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.xiaoyaoyou.xmall.order.dao.OrderPayMapper">
+    <select id="queryById" resultType="io.xiaoyaoyou.xmall.common.entity.OrderPay">
+        SELECT *
+        FROM order_pay
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryByOrderId" resultType="io.xiaoyaoyou.xmall.common.entity.OrderPay">
+        SELECT *
+        FROM order_pay
+        WHERE order_id = #{orderId}
+    </select>
+
+    <insert id="insert" parameterType="io.xiaoyaoyou.xmall.common.entity.OrderPay">
+        INSERT INTO order_pay(order_id, pay_type,pay_amount, create_time)
+        VALUES (#{orderId}, #{payType},#{payAmount}, now())
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+</mapper>

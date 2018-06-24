@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.xiaoyaoyou.xmall.goods.dao.GoodsMapper">
+    <select id="queryById" resultType="io.xiaoyaoyou.xmall.common.entity.Goods">
+        SELECT *
+        FROM goods
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryAllGoods" resultType="io.xiaoyaoyou.xmall.common.entity.Goods">
+        SELECT *
+        FROM goods
+        ORDER BY id;
+    </select>
+
+    <select id="queryByStartAndEndTime" resultType="io.xiaoyaoyou.xmall.common.entity.Goods">
+        SELECT *
+        FROM goods
+        WHERE start_time <![CDATA[ <= ]]> #{currTime}
+          AND end_time > #{currTime}
+          ORDER BY create_time
+    </select>
+
+    <insert id="insert" parameterType="io.xiaoyaoyou.xmall.common.entity.Goods">
+        INSERT INTO goods(name, origin_price,kill_price,detail,start_time,end_time)
+        VALUES (#{name}, #{originPrice},#{killPrice},#{detail},#{startTime},#{endTime})
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+</mapper>

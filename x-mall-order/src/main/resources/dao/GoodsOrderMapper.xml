@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.xiaoyaoyou.xmall.order.dao.GoodsOrderMapper">
+    <select id="queryById" resultType="io.xiaoyaoyou.xmall.common.entity.GoodsOrder">
+        SELECT *
+        FROM goods_order
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryByOrderNo" resultType="io.xiaoyaoyou.xmall.common.entity.GoodsOrder">
+        SELECT *
+        FROM goods_order
+        WHERE order_no = #{orderNo}
+    </select>
+
+    <select id="queryByUidGoodsId" resultType="io.xiaoyaoyou.xmall.common.entity.GoodsOrder">
+        SELECT *
+        FROM goods_order
+        WHERE uid = #{uid} AND goods_id = #{goodsId}
+        limit 1
+    </select>
+
+    <insert id="insert" parameterType="io.xiaoyaoyou.xmall.common.entity.GoodsOrder">
+        INSERT INTO goods_order(order_no, uid,goods_id,status, origin_price, kill_price, create_time)
+        VALUES (#{orderNo}, #{uid},#{goodsId},#{status},#{originPrice},  #{killPrice}, now())
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="updateStatusByNo">
+      UPDATE goods_order SET status = #{status}
+      WHERE order_no = #{orderNo}
+    </update>
+
+    <update id="updateStatusById">
+        UPDATE goods_order SET status = #{status}
+        WHERE id = #{id}
+    </update>
+</mapper>

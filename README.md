@@ -1,2 +1,2 @@
 # x-mall
-a demo for distributed app
+a demo for distributed app :D
