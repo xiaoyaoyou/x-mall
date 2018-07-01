@@ -21,9 +21,6 @@ public class MQReceiver {
 
     @RabbitListener(queues= MQQueue.QUEUE_GOODS_CREATE_ORDER, errorHandler="orderCreateMsgErrHandler")
     public void receive(String msg) {
-        if(1 == 1) {
-            throw new ServiceException("order create msg create failed");
-        }
         goodsOrderService.orderCreateMsgHandler(msg);
     }
 }

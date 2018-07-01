@@ -101,10 +101,6 @@ public class GoodsOrderService implements GoodsOrderServiceI {
         String[] msgArr = msg.split("\\|");
         logger.info("--------- msgArr length is " + msgArr.length);
 
-        if(MSG_HANDLER_COUNT.incrementAndGet() > 0) {
-            return;
-        }
-
         doCreateOrder(msgArr);
     }
 
