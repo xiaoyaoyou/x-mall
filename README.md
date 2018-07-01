@@ -25,13 +25,12 @@
 5. 修改配置文件，x-mall的配置文件主要分为两大块，第一块为每个包内的.properties文件，里面指定了对应的spring，redis，RabbitMQ，ZooKeeper相关配置；另外一块为项目外的独立配置，当前xmall的配置路径为:/xmall/conf/core/jdbc.properties，若是windows系统，则放置于项目同目录下即可，该目录当前只包含jdbc相关配置
 之所以将配置分为两部分，主要考虑到项目内的.properties是各开发人员或环境公用的，而项目外的配置文件可以做到各开发人员或环境隔离互不干扰，本项目只是提供这两种配置的使用样例。实际使用的时候一般有一个独立的配置中心，可以将所有配置文件都放置于项目内并做到各开发人员或环境独立性。jdbc.properties实例：
     ```
-        spring.datasource.url=jdbc:mysql://192.168.1.10:3306/x-mall?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useServerPrepStmts=true&cachePrepStmts=true
-        spring.datasource.jdbc-url=jdbc:mysql://192.168.1.10:3306/x-mall?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useServerPrepStmts=true&cachePrepStmts=true
-        spring.datasource.username=root
-        spring.datasource.password=root
-        spring.datasource.driverClassName=com.mysql.jdbc.Driver
-        spring.datasource.testOnBorrow=true
-        spring.datasource.validationQuery=SELECT 1
+    spring.datasource.jdbc-url=jdbc:mysql://192.168.1.10:3306/x-mall?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useServerPrepStmts=true&cachePrepStmts=true
+    spring.datasource.username=root
+    spring.datasource.password=root
+    spring.datasource.driverClassName=com.mysql.jdbc.Driver
+    spring.datasource.testOnBorrow=true
+    spring.datasource.validationQuery=SELECT 1
 
     ```
 6. 初始化数据库，执行x-mall-common模块下db/init.sql文件
